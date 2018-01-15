@@ -8,7 +8,8 @@ require 'Main.php';
     $Main = new Main($_FILES);
     print_r($_FILES);
     $Main->checkError();
-    print_r($Main->Ex(false,true));
+    print_r($Main->Extend(false,true));
+    printf($Main->Size(true,true,20,50));
 
 ?>
 

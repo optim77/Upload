@@ -6,12 +6,10 @@
  * Time: 12:45
  */
 
-namespace Upload\Main;
-use Upload\Main\Exception;
-require 'Exception.php';
+namespace Upload\Extend;
+
 class Extend
 {
-
     public function __construct($extends)
     {
 
