@@ -24,11 +24,8 @@ class Size
      * @return bool
      * @throws \Exception
      */
-    public function generalSize($minSize,$maxSize){
+    public function generalSize($minSize = 0,$maxSize = 800000){
         $s = $this->size;
-        if ($minSize == null || $maxSize == null){
-            return "<div class='alert alert-danger'>Insert default size of file</div>";
-        }
         if($s >= $minSize && $s <= $maxSize){
             return true;
         }else{

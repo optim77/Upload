@@ -7,15 +7,15 @@ use Upload\Size\Size;
 
 require 'Extend.php';
 require 'Size.php';
-
+require 'Name.php';
+require 'Path.php';
 class Main{
 
 	
 	public function __construct($file){
 
 		$this->file = $file;
-		//print_r($this->file);
-		$this->name = $this->file['file']['name'];
+		$this->name = $file['file']['name'];
 		$this->type = $file['file']['type'];
 		$this->tmp = $file['file']['tmp_name'];
 		$this->error = $file['file']['error'];
@@ -88,14 +88,56 @@ class Main{
     }
 
     /**
-     * Whole action to upload one file:
-     * extends
-     * maxSize
-     * pathToFile
-     * RenameFile
-     * Alerts
+     * Return name of the file with extension
+     * If randomName is true return random name with unique + insert lengthRandomName
+     * If stripName is true return original name without danger chars do not have to insert lengthRandomName
+     * @param $randomName
+     * @param $stripName
+     * @param int $lengthRandomName
+     * @return string
      */
-    public function oneHandUpload(){
+    public function Name($randomName,$stripName,$lengthRandomName = 30){
+        $Name = new Name($this->name);
+        if($randomName == true){
+            return $Name->randomName($lengthRandomName);
+        }
+        elseif ($stripName == true){
+            return $Name->stripName();
+        }
+    }
+
+    /**
+     * Move file to such location as on variable
+     * @param null $location
+     * @param $name
+     * @return bool
+     */
+    public function Move($location = null,$name){
+        $Move = new Path($this->tmp);
+        $Move->getPath($location);
+        if($Move->move($name)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Default options to upload file
+     */
+    public function oneHandUpload($extendExact = false,$extendGeneral = true,array $forbiddenExt = array(),$generalSize = true,$exactSize = false,$minSizeGeneral = 0,$maxSizeGeneral = 800000,$randomName = true,$stripName = false,$lengthName = 30,$location = null,$name = null){
+
+        if($this->checkError()){
+            $info = array();
+            $info['type'] = $this->Extend($extendExact,$extendGeneral,$forbiddenExt);
+            $info['size'] =$this->Size($generalSize,$exactSize,$minSizeGeneral,$maxSizeGeneral);
+            $name = $this->Name($randomName,$stripName,$lengthName);
+            $info['name'] = $name;
+            $this->Move($location,$name);
+            return $info;
+        }else{
+            return "<div class='alert alert-danger'>Ups... Something wrong</div>";
+        }
 
     }
 

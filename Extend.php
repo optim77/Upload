@@ -32,17 +32,12 @@ class Extend
      */
     public function generalFormat(array $forbiddenFormats = array()){
         $f = $this->extend;
-        print_r($f);
-        $flag = false;
         if($forbiddenFormats != null){
             foreach ($forbiddenFormats as $key){
 
                 if ($key == $f){
-                    $Exception = new Exception();
-                    return $Exception->wrongFormatException();
+                    return "<div class='alert alert-danger'>Wrong format of files</div>";
                     break;
-                }else{
-                    $flag = true;
                 }
             }
         }

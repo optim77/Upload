@@ -5,12 +5,11 @@ use Upload\Main\Main;
 
 require 'Main.php';
 
-    $Main = new Main($_FILES);
-    print_r($_FILES);
-    $Main->checkError();
-    print_r($Main->Extend(false,true));
-    printf($Main->Size(true,true,20,50));
+    if (isset($_POST['sub'])){
 
+        $Main = new Main($_FILES);
+        print_r($Main->oneHandUpload());
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +18,7 @@ require 'Main.php';
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body style="background-color: #00000f;color: #fff;">
 
     <form method="post" action="index.php" enctype="multipart/form-data" >
         <input name="text" type="text">
