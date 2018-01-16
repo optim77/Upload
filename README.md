@@ -10,43 +10,50 @@ $Main->oneHandUpload()</blockquote>
 
 <h2>You can:</h2>
 <ol>
-<li>Determine the file size</li>
-<li>Dermine the file size depending on the file format</li>
-<li>Determine able or unable file formats</li>
-<li>Determine type of name file</li>
-<li>Determine the path to save file</li>
+<li>Determine the file size.</li>
+<li>Dermine the file size depending on the file format.</li>
+<li>Determine able or unable file formats.</li>
+<li>Determine type of name file.</li>
+<li>Determine the path to save file.</li>
 </ol>
 
 <h2>Introduction:</h2>
 <h3>Validate extend of file:</h3>
 If you want change extend of file you can do this on two way.<br>
 First you have to choose how to return the value.<br>
-They are two ways.<br>First is a return exact type of file and second is a return approximate type of file (if you insert jpeg or png function return 'image')<br>
+They are two ways.<br>First is a return exact type of file and second is a return approximate type of file (if you insert jpeg or png function return 'image').<br>
+<br>
 First way is a insert true on first value in function <code>$Main->oneHandUpload(true);</code> or <code>$Main->Extend(true);</code><br>
+<br>
 Second option is a fill second argument in function <code>$Main->oneHandUpload(false,true);</code> or <code>$Main->Extend(false,true);</code>
+<br>
 Also if you want to forbidden some extends you can insert array of this values in function <code>$Main->oneHandUpload(false,true,array('image/jpeg','audio/mpeg'));</code> or <code>$Main->Extend(false,true,array('image/jpeg','audio/mpeg'));</code>
 <br>
 <br>
+
 <h3>Size of file:</h3>
-To determine the size range of the file you should:<br>
-A.If you want set the same size of the whole format you have
+To determine the size range of the file you should:<br><br>
+1.<br>If you want set the same size of the whole format you have
 to insert true as the fourth argument and insert minimal and maximal in 
 next two <code>$Main->oneHandUpload(true,false,null,true,0,800000);</code> or <code>$Main->Size(true,false,0,800000)</code><br>
-B.If you want set different sizes to files you have to insert true as 
+<br>
+2.<br>If you want set different sizes to files you have to insert true as 
 fifth argument and add array with extend and sizes as the 
 eight argument <code>$Main->oneHandUpload(true,false,null,false,true,null,null,array('image/jgep' => ['minSize','maxSize'],'video/mp4' => ['minSize','maxSize']));</code> or <code>$Main->Size(true,false,null,null,array('image/jgep' => ['minSize','maxSize'],'video/mp4' => ['minSize','maxSize']))</code><br>
 <br>
 <br>
+
+
 <h3>Name of file:</h3>
-There are two ways to save the file name:<br>
-A.Generate new name file using <code>sha1(uniqid(null,true))</code>.When you want use it you have to insert true as the ninth arguments <code>$Main->oneHandUpload(true,false,null,true,0,800000,null,true);</code> or <code>$Main->Name(true,false);</code><br>
-B.Use the same name of file without danger chars.To use this you have to insert true as tenth arguments in function and insert length of mane as eleventh argument <code>$Main->oneHandUpload(true,false,null,true,0,800000,null,false,true,50);</code> or <code>$Main->Name(false,true,50);</code>
+There are two ways to save the file name:<br><br>
+1.<br>Generate new name file using <code>sha1(uniqid(null,true))</code>.When you want use it you have to insert true as the ninth arguments <code>$Main->oneHandUpload(true,false,null,true,0,800000,null,true);</code> or <code>$Main->Name(true,false);</code><br>
+2.<br>Use the same name of file without danger chars.To use this you have to insert true as tenth arguments in function and insert length of mane as eleventh argument <code>$Main->oneHandUpload(true,false,null,true,0,800000,null,false,true,50);</code> or <code>$Main->Name(false,true,50);</code>
 <br>
 <br>
 <h3>Location of file:</h3>
-The twelfth argument is used to determine the location.
-The location begins with the Path file in the src folder.
-It uses the __DIR__ variable.
+The twelfth argument is used to determine the location.<br>
+The location begins with the Path file in the src folder.<br>
+It uses the __DIR__ variable.<br>
 Initially, all files are saved in the src / upload folder.
 If you want change in you have to insert the location as the last argument of function <code>$Main->oneHandUpload(true,false,null,true,0,800000,null,true,false,null,'../../upload/');</code> or <code>$name = $Main->Name(true,false); $Main->Move('../../upload',$name);</code><br><br>
 
