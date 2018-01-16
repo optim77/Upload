@@ -3,7 +3,7 @@
 namespace Upload\index;
 use Upload\Main\Main;
 
-require 'Main.php';
+require 'src/Main.php';
 
     if (isset($_POST['sub'])){
 

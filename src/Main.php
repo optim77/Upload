@@ -125,12 +125,12 @@ class Main{
     /**
      * Default options to upload file
      */
-    public function oneHandUpload($extendExact = false,$extendGeneral = true,array $forbiddenExt = array(),$generalSize = true,$exactSize = false,$minSizeGeneral = 0,$maxSizeGeneral = 800000,$randomName = true,$stripName = false,$lengthName = 30,$location = null,$name = null){
+    public function oneHandUpload($extendExact = false,$extendGeneral = true,array $forbiddenExt = array(),$generalSize = true,$exactSize = false,$minSizeGeneral = 0,$maxSizeGeneral = 800000,array $exactFormatSizes = array(),$randomName = true,$stripName = false,$lengthName = 30,$location = null){
 
         if($this->checkError()){
             $info = array();
             $info['type'] = $this->Extend($extendExact,$extendGeneral,$forbiddenExt);
-            $info['size'] =$this->Size($generalSize,$exactSize,$minSizeGeneral,$maxSizeGeneral);
+            $info['size'] =$this->Size($generalSize,$exactSize,$minSizeGeneral,$maxSizeGeneral,$exactFormatSizes);
             $name = $this->Name($randomName,$stripName,$lengthName);
             $info['name'] = $name;
             $this->Move($location,$name);
